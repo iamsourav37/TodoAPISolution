@@ -1,10 +1,10 @@
 @TodoAPI_HostAddress = http://localhost:5188
 
+### Todo API Test
 GET {{TodoAPI_HostAddress}}/api/Todo/
 Accept: application/json
 
 ###
 
-
-GET {{TodoAPI_HostAddress}}/api/Todo/05EBA296-D326-4BC7-8A47-91CB1D60AEDF
+GET {{TodoAPI_HostAddress}}/api/Todo/83d31baf-3e70-4579-389f-08dcf385a155
 Accept: application/json
