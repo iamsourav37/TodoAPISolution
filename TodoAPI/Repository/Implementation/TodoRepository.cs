@@ -20,19 +20,26 @@ namespace TodoAPI.Repository.Implementation
             await _dbContext.SaveChangesAsync();
         }
 
-        public Task DeleteTodoAsync(Guid todoId)
+        public async Task<bool> DeleteTodoAsync(Guid todoId, Guid userId)
         {
-            throw new NotImplementedException();
+            var existingTodo = _dbContext.Todos.FirstOrDefault(todo => todo.Id == todoId && todo.UserId == userId);
+            if (existingTodo != null)
+            {
+                _dbContext.Remove(existingTodo);
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            return false;
         }
 
-        public async Task<IEnumerable<Todo>> GetAllTodoAsync()
+        public async Task<IEnumerable<Todo>> GetAllTodoAsync(Guid userId)
         {
-            return await _dbContext.Todos.ToListAsync();
+            return await _dbContext.Todos.Where(todo => todo.UserId == userId).ToListAsync();
         }
 
-        public async Task<Todo> GetTodoByIdAsync(Guid id)
+        public async Task<Todo> GetTodoByIdAsync(Guid id, Guid userId)
         {
-            return await _dbContext.Todos.FindAsync(id);
+            return await _dbContext.Todos.FirstOrDefaultAsync(todo => todo.UserId == userId);
         }
 
         public Task UpdateTodoAsync(Todo todo)

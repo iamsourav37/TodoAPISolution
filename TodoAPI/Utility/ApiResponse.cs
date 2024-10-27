@@ -1,10 +1,10 @@
 ﻿namespace TodoAPI.Utility
 {
-    public class ApiResponse<T> where T : class
+    public class ApiResponse
     {
         public ApiResponse() { }
 
-        public ApiResponse(int statusCode, string[] errors, T data)
+        public ApiResponse(int statusCode, string[] errors, object data)
         {
             StatusCode = statusCode;
             Errors = errors;
@@ -14,6 +14,6 @@
 
         public int StatusCode { get; set; }
         public string[]? Errors { get; set; }
-        public T? Data { get; set; }
+        public object? Data { get; set; }
     }
 }

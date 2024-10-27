@@ -6,8 +6,8 @@ namespace TodoAPI.Repository.Interface
     {
         Task CreateTodoAsync(Todo todo);
         Task UpdateTodoAsync(Todo todo);
-        Task DeleteTodoAsync(Guid todoId);
-        Task<Todo> GetTodoByIdAsync(Guid id);
-        Task<IEnumerable<Todo>> GetAllTodoAsync();
+        Task<bool> DeleteTodoAsync(Guid todoId, Guid userId);
+        Task<Todo> GetTodoByIdAsync(Guid id, Guid userId);
+        Task<IEnumerable<Todo>> GetAllTodoAsync(Guid userId);
     }
 }
