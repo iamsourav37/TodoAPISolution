@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using TodoAPI.Filters;
 using TodoAPI.Models.Domain;
 using TodoAPI.Models.DTOs.TodoDtos;
 using TodoAPI.Repository.Interface;
@@ -11,7 +12,7 @@ using TodoAPI.Utility;
 
 namespace TodoAPI.Controllers
 {
-    [Authorize]
+    [CustomAuthorizeAttribute]
     [Route("api/[controller]")]
     [ApiController]
     public class TodoController : ControllerBase

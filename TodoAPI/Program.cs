@@ -8,6 +8,9 @@ using TodoAPI.Repository.Interface;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Text.Json;
+using TodoAPI.Utility;
+using TodoAPI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,7 +61,7 @@ builder.Services.AddSwaggerGen();
 #region Add Dependencies here
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddTransient<ITodoRepository, TodoRepository>();
-
+builder.Services.AddTransient<TokenCheckMiddleware>();
 #endregion
 
 
@@ -71,6 +74,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<TokenCheckMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 
